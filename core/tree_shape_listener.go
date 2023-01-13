@@ -1,18 +1,17 @@
 package core
 
 import (
-	"fmt"
-	"github.com/antlr/antlr4/runtime/Go/antlr/v4"
+	"github.com/thsfranca/fugo/core/parser"
 )
 
 type TreeShapeListener struct {
-	*antlr.BaseParseTreeListener
+	*parser.BaseFugoListener
 }
 
 func NewTreeShapeListener() *TreeShapeListener {
 	return new(TreeShapeListener)
 }
 
-func (t *TreeShapeListener) EnterFunction(ctx antlr.ParserRuleContext) {
-	fmt.Println("HERE")
+func (t *TreeShapeListener) EnterFn(ctx *parser.FnContext) {
+	identifiers[ctx.IDENTIFIER(0).GetText()].(func(text string))("teste")
 }

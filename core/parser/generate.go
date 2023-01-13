@@ -1,3 +1,3 @@
-package grammar
+package parser
 
 //go:generate ./generate.sh
