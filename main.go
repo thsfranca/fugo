@@ -2,10 +2,10 @@ package main
 
 import (
 	"github.com/thsfranca/fugo/core"
+	"github.com/thsfranca/fugo/lang/parser"
 	"os"
 
 	"github.com/antlr/antlr4/runtime/Go/antlr/v4"
-	"github.com/thsfranca/fugo/core/parser"
 )
 
 func main() {
@@ -14,11 +14,11 @@ func main() {
 		panic(err)
 	}
 
-	lexer := parser.NewFugoLexer(input)
+	lexer := core.NewFugoLexer(input)
 	stream := antlr.NewCommonTokenStream(lexer, 0)
-	fugoParser := parser.NewFugoParser(stream)
+	fugoParser := core.NewFugoParser(stream)
 	fugoParser.AddErrorListener(antlr.NewDiagnosticErrorListener(true))
-	tree := fugoParser.Program()
-	treeShapeListener := core.NewTreeShapeListener()
+	tree := fugoParser.Form()
+	treeShapeListener := parser.NewTreeShapeListener()
 	antlr.ParseTreeWalkerDefault.Walk(treeShapeListener, tree)
 }

@@ -1,1 +1,3 @@
-(def nova-funcao [arg1 arg2])
+(def hello "hello, world")
+
+(print hello)
